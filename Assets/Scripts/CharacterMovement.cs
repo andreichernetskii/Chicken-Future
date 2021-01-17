@@ -9,9 +9,9 @@ public class CharacterMovement : MonoBehaviour
     [Tooltip("Karakterin hızı.")]
     public float characterMoveSpeed = .01f;
 
-    Touch touch;
-    private Ray fingerRay;
-    private Vector3 fingerPos;
+    [HideInInspector]
+    public Touch touchOther;
+    private Touch touchMovement;
     private Vector3 firstTouchPosition;
     private Vector3 instantTouchPosition;
     private Vector3 touchToCharacterDirection;
@@ -28,34 +28,44 @@ public class CharacterMovement : MonoBehaviour
         if(Input.touchCount > 0)
         {
             //Dokunma bilgisi touch isimli değişkende saklanır.
-            touch = Input.GetTouch(0);
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                if (Camera.main.ScreenToViewportPoint(Input.GetTouch(i).position).x < .5f)
+                {
+                    touchMovement = Input.GetTouch(i);
+                }
+                else
+                {
+                    touchOther = Input.GetTouch(i);
+                }
+            }
 
             //Eğer ekranın sol tarafına dokunulduysa ve yürümekte ise hareket işlemi gerçekleşir.
-            if (Camera.main.ScreenToViewportPoint(touch.position).x < .5f || isWalking)
+            if (Camera.main.ScreenToViewportPoint(touchMovement.position).x < .5f || isWalking)
             {
-                if (touch.phase == TouchPhase.Began)
+                if (touchMovement.phase == TouchPhase.Began)
                 {
                     //İlk parmak pozisyonunu alır.
-                    firstTouchPosition = touch.position;
+                    firstTouchPosition = touchMovement.position;
 
                     //Karakterin yürüdüğü belirtilir.
                     isWalking = true;
                 }
 
-                if (touch.phase == TouchPhase.Moved)
+                if (touchMovement.phase == TouchPhase.Moved)
                 {
                     //Anlık parmak pozisyonunu alır.
-                    instantTouchPosition = touch.position;
+                    instantTouchPosition = touchMovement.position;
 
-                    //Son ve ilk parmak pozisyonu arası vektör belirler.
-                    touchToCharacterDirection = Vector3.Normalize(instantTouchPosition - firstTouchPosition);
+                    //Son ve ilk parmak pozisyonu arası vektör belirler. (max 1 birim uzunlukta)
+                    touchToCharacterDirection = Vector3.ClampMagnitude(instantTouchPosition - firstTouchPosition,1f);
 
                     //Dokunma pozisyonlarına göre hareket işlemi
-                    transform.Translate(touchToCharacterDirection.x * characterMoveSpeed * Time.deltaTime, 0, touchToCharacterDirection.y * characterMoveSpeed * Time.deltaTime);
+                    Move(touchToCharacterDirection);
 
                 }
 
-                if (touch.phase == TouchPhase.Ended)
+                if (touchMovement.phase == TouchPhase.Ended)
                 {
                     //Karakterin durduğu belirtilir.
                     isWalking = false;
@@ -63,5 +73,14 @@ public class CharacterMovement : MonoBehaviour
             }
         }
         
+    }
+
+    /// <summary>
+    /// Moving character in vector direction.
+    /// </summary>
+    /// <param name="direction">Vector3 direction.</param>
+    void Move(Vector3 direction)
+    {
+        transform.Translate(direction.x * characterMoveSpeed * Time.deltaTime, 0, direction.y * characterMoveSpeed * Time.deltaTime);
     }
 }
