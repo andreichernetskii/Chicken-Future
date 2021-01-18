@@ -81,6 +81,9 @@ public class CharacterMovement : MonoBehaviour
     /// <param name="direction">Vector3 direction.</param>
     void Move(Vector3 direction)
     {
-        transform.Translate(direction.x * characterMoveSpeed * Time.deltaTime, 0, direction.y * characterMoveSpeed * Time.deltaTime);
+        //Karakterin hareketi.
+        transform.Translate(direction.x * characterMoveSpeed * Time.deltaTime, 0, direction.y * characterMoveSpeed * Time.deltaTime,Space.World);
+        //Karakterin dönmesi.
+        transform.rotation = Quaternion.LookRotation(new Vector3(direction.x,0,direction.y));
     }
 }
