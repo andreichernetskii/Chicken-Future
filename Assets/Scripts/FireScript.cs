@@ -21,6 +21,7 @@ public class FireScript : MonoBehaviour
 
     //Geçen zaman
     float time = 0;
+
     void Start()
     {
     }
@@ -55,5 +56,18 @@ public class FireScript : MonoBehaviour
     {
         //Belirlenen konumda kurşunu oluşturur.
         Instantiate(bulletObject,transform.position + GetComponent<CapsuleCollider>().bounds.extents.y * Vector3.up,transform.rotation);
+    }
+}
+
+public class HitInfo : MonoBehaviour
+{
+    private void Start()
+    {
+
+        BulletInfo bullet = new BulletInfo();
+
+        bullet.GunId = 5;
+
+        Debug.Log(bullet.Name + bullet.FireRate);
     }
 }

@@ -60,6 +60,10 @@
     <Compile Include="Assets\Scripts\CharacterMovement.cs" />
     <Compile Include="Assets\Scripts\FireScript.cs" />
     <Compile Include="Assets\Scripts\CharacterCamera.cs" />
+    <Compile Include="Assets\Scripts\GetHit.cs" />
+    <Compile Include="Assets\Scripts\BulletInfo.cs" />
+    <Compile Include="Assets\Scripts\CharStatistics.cs" />
+    <Compile Include="Assets\Scripts\CharInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
