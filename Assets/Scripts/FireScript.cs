@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,8 +25,24 @@ public class FireScript : MonoBehaviour
     //Geçen zaman
     float time = 0;
 
+    Guns guns = new Guns();
+
     void Start()
     {
+
+        Debug.Log("Silah bilgileri çekiliyor");
+        
+        string path = "Assets/Scripts/gunList.xml";
+
+        XmlSerializer serializer = new XmlSerializer(typeof(Guns));
+
+        StreamReader reader = new StreamReader(path);
+        guns = ((Guns)serializer.Deserialize(reader));
+        reader.Close();
+        Debug.Log("Silah özellikleri isim:" + guns.gun[0].name + " fireRate:" + guns.gun[0].fireRate + "bulletSpeed" + guns.gun[0].bulletSpeed);
+        Debug.Log("Silah özellikleri isim:" + guns.gun[1].name + " fireRate:" + guns.gun[1].fireRate + "bulletSpeed" + guns.gun[1].bulletSpeed);
+        Debug.Log("Silah özellikleri isim:" + guns.gun[2].name + " fireRate:" + guns.gun[2].fireRate + "bulletSpeed" + guns.gun[2].bulletSpeed);
+
     }
 
     void Update()
@@ -63,11 +82,18 @@ public class HitInfo : MonoBehaviour
 {
     private void Start()
     {
+        Debug.Log("çalıştı");
+        XmlDocument doc = new XmlDocument();
+        doc.Load("gunList.xml");
 
-        BulletInfo bullet = new BulletInfo();
+        //Get the first element with an attribute of type ID and value of A111.
+        //This displays the node <Person SSN="A111" Name="Fred"/>.
+        XmlElement elem = doc.GetElementById("1");
+        Debug.Log(elem.OuterXml);
 
-        bullet.GunId = 5;
-
-        Debug.Log(bullet.Name + bullet.FireRate);
+        //Get the first element with an attribute of type ID and value of A222.
+        //This displays the node <Person SSN="A222" Name="Tom"/>.
+        elem = doc.GetElementById("2");
+        Debug.Log(elem.OuterXml);
     }
 }

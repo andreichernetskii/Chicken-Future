@@ -1,42 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
+[Serializable()]
 public class BulletInfo
 {
-    private int gunId;
-    private string name;
-    private float fireRate;
-    private float bulletSpeed;
+    public int gunId { get; set; }
+    [System.Xml.Serialization.XmlElementAttribute("Name")]
+    public string name { get; set; }
+    [System.Xml.Serialization.XmlElementAttribute("FireRate")]
+    public float fireRate { get; set; }
+    [System.Xml.Serialization.XmlElementAttribute("BulletSpeed")]
+    public float bulletSpeed { get; set; }
 
-    public string Name
+}
+
+[Serializable()]
+[System.Xml.Serialization.XmlRoot("BulletInfo")]
+public class Guns
+{
+    [XmlArray("guns")]
+    [XmlArrayItem("gun", typeof(BulletInfo))]
+    public BulletInfo[] gun { get; set; }
+
+    void dene()
     {
-        get{return name;}
     }
-
-    public float FireRate
-    {
-        get{return fireRate;}
-    }
-
-    public float BulletSpeed
-    {
-        get{return bulletSpeed;}
-    }
-
-    public int GunId
-    {
-        set
-        {
-            //bu kısımda silah verileri çekilecek.
-            if (value == 5)
-            {
-                name = "merhaba";
-                fireRate = 32.32f;
-                bulletSpeed = 45.542f;
-            }
-        }
-    }
-
-
 }

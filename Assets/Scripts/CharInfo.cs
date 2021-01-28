@@ -10,17 +10,4 @@ public class CharInfo
     private float health;
     private int exp;
     
-    public int Id
-    {
-        set
-        {
-            if (value == 3)
-            {
-                type = 1;
-                name = "player";
-                health = 500.4f;
-                exp = 5000;
-            }
-        }
-    }
 }

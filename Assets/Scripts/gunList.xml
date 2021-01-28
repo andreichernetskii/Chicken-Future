@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BulletInfo>
+  <guns>
+  <gun>
+    <Name>UMP</Name>
+    <FireRate>3.5</FireRate>
+    <BulletSpeed>25</BulletSpeed>
+  </gun>
+  
+  <gun>
+    <Name>P90</Name>
+    <FireRate>1.0</FireRate>
+    <BulletSpeed>20</BulletSpeed>
+  </gun>
+
+  <gun>
+    <Name>AK47</Name>
+    <FireRate>2.0</FireRate>
+    <BulletSpeed>50</BulletSpeed>
+  </gun>
+  </guns>
+</BulletInfo>
