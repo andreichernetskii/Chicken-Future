@@ -25,6 +25,9 @@ public class FireScript : MonoBehaviour
     //Geçen zaman
     float time = 0;
 
+    //elinde tuttuğu silahın ID numarası.
+    public int currentGun = 0;
+
     Guns guns = new Guns();
 
     void Start()
@@ -39,9 +42,20 @@ public class FireScript : MonoBehaviour
         StreamReader reader = new StreamReader(path);
         guns = ((Guns)serializer.Deserialize(reader));
         reader.Close();
-        Debug.Log("Silah özellikleri isim:" + guns.gun[0].name + " fireRate:" + guns.gun[0].fireRate + "bulletSpeed" + guns.gun[0].bulletSpeed);
-        Debug.Log("Silah özellikleri isim:" + guns.gun[1].name + " fireRate:" + guns.gun[1].fireRate + "bulletSpeed" + guns.gun[1].bulletSpeed);
-        Debug.Log("Silah özellikleri isim:" + guns.gun[2].name + " fireRate:" + guns.gun[2].fireRate + "bulletSpeed" + guns.gun[2].bulletSpeed);
+        
+        //Debug.Log("Silah özellikleri isim:" + guns.gun[0].name + " fireRate:" + guns.gun[0].fireRate + " bulletSpeed:" + guns.gun[0].bulletSpeed);
+
+        foreach (BulletInfo item in guns.gun)
+        {
+            if (currentGun == item.gunId)
+            {
+                fireRate = item.fireRate;
+                bulletSpeed = item.bulletSpeed;
+
+                Debug.Log($"Current gun name:{item.name} , id:{item.gunId} , firerate:{item.fireRate} , bulletspeed:{item.bulletSpeed}");
+                break;
+            }
+        }
 
     }
 

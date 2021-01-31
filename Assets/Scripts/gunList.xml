@@ -3,21 +3,24 @@
 <BulletInfo>
   <guns>
   <gun>
+    <gunId>0</gunId>
     <Name>UMP</Name>
-    <FireRate>3.5</FireRate>
-    <BulletSpeed>25</BulletSpeed>
+    <FireRate>.75</FireRate>
+    <BulletSpeed>20</BulletSpeed>
   </gun>
   
   <gun>
+    <gunId>1</gunId>
     <Name>P90</Name>
-    <FireRate>1.0</FireRate>
-    <BulletSpeed>20</BulletSpeed>
+    <FireRate>.1</FireRate>
+    <BulletSpeed>70</BulletSpeed>
   </gun>
 
   <gun>
+    <gunId>2</gunId>
     <Name>AK47</Name>
-    <FireRate>2.0</FireRate>
-    <BulletSpeed>50</BulletSpeed>
+    <FireRate>.25</FireRate>
+    <BulletSpeed>90</BulletSpeed>
   </gun>
   </guns>
 </BulletInfo>

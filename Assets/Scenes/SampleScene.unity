@@ -1044,6 +1044,7 @@ MonoBehaviour:
   fireRate: 0.25
   bulletSpeed: 50
   destroyTime: 5
+  currentGun: 1
 --- !u!114 &1612500764
 MonoBehaviour:
   m_ObjectHideFlags: 0

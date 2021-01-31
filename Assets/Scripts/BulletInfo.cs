@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable()]
 public class BulletInfo
 {
+    [System.Xml.Serialization.XmlElementAttribute("gunId")]
     public int gunId { get; set; }
     [System.Xml.Serialization.XmlElementAttribute("Name")]
     public string name { get; set; }
@@ -23,7 +24,7 @@ public class Guns
 {
     [XmlArray("guns")]
     [XmlArrayItem("gun", typeof(BulletInfo))]
-    public BulletInfo[] gun { get; set; }
+    public List <BulletInfo> gun { get; set; }
 
     void dene()
     {
