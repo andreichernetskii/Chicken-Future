@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FireScript : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class FireScript : MonoBehaviour
     //Merminin sürati
     public float bulletSpeed=50;
     //Merminin yok olma süresi.
-    public float destroyTime=5;
+    public float destroyTime=3;
 
     //Geçen zaman
     float time = 0;
@@ -35,27 +36,31 @@ public class FireScript : MonoBehaviour
 
         Debug.Log("Silah bilgileri çekiliyor");
         
-        string path = "Assets/Scripts/gunList.xml";
+        try
+        { 
+            //xml dosyasının yolu stringe atandı.
+            string path = "Assets/Scripts/gunList.xml";
 
-        XmlSerializer serializer = new XmlSerializer(typeof(Guns));
+            //Guns tipinde xmlSerializer oluşturuldu
+            XmlSerializer serializer = new XmlSerializer(typeof(Guns));
 
-        StreamReader reader = new StreamReader(path);
-        guns = ((Guns)serializer.Deserialize(reader));
-        reader.Close();
-        
-        //Debug.Log("Silah özellikleri isim:" + guns.gun[0].name + " fireRate:" + guns.gun[0].fireRate + " bulletSpeed:" + guns.gun[0].bulletSpeed);
+            //Dosya yolundaki xml verisi reader'da saklandı.
+            StreamReader reader = new StreamReader(path);
+            //Deserialize edilerek guns isimli listeye tüm değerler atandı.
+            guns = ((Guns)serializer.Deserialize(reader));
+            //xml okuyucu kapatıldı.
+            reader.Close();
 
-        foreach (BulletInfo item in guns.gun)
-        {
-            if (currentGun == item.gunId)
-            {
-                fireRate = item.fireRate;
-                bulletSpeed = item.bulletSpeed;
-
-                Debug.Log($"Current gun name:{item.name} , id:{item.gunId} , firerate:{item.fireRate} , bulletspeed:{item.bulletSpeed}");
-                break;
-            }
+            //Take gun fonksiyonu çalıştırıldı.
+            takeGun(currentGun);
         }
+        catch
+        {
+            Debug.Log("Silah verileri çekilirken hata oluştur. Oyun kapanıyor");
+            Application.Quit();
+        }
+
+        //Debug.Log("Silah özellikleri isim:" + guns.gun[0].name + " fireRate:" + guns.gun[0].fireRate + " bulletSpeed:" + guns.gun[0].bulletSpeed);
 
     }
 
@@ -90,24 +95,34 @@ public class FireScript : MonoBehaviour
         //Belirlenen konumda kurşunu oluşturur.
         Instantiate(bulletObject,transform.position + GetComponent<CapsuleCollider>().bounds.extents.y * Vector3.up,transform.rotation);
     }
-}
 
-public class HitInfo : MonoBehaviour
-{
-    private void Start()
+    void takeGun(int id)
     {
-        Debug.Log("çalıştı");
-        XmlDocument doc = new XmlDocument();
-        doc.Load("gunList.xml");
+        //Silahı aramak için foreach
+        //Kısacası Id'si girilmiş silahı bulup çıkartır ve bunu silah özelliklerine ekler.
+        foreach (BulletInfo item in guns.gun)
+        {
+            if (id == item.gunId)
+            {
+                fireRate = item.fireRate;
+                bulletSpeed = item.bulletSpeed;
 
-        //Get the first element with an attribute of type ID and value of A111.
-        //This displays the node <Person SSN="A111" Name="Fred"/>.
-        XmlElement elem = doc.GetElementById("1");
-        Debug.Log(elem.OuterXml);
+                Debug.Log($"Current gun name:{item.name} , id:{item.gunId} , firerate:{item.fireRate} , bulletspeed:{item.bulletSpeed}");
+                break;
+            }
+        }
 
-        //Get the first element with an attribute of type ID and value of A222.
-        //This displays the node <Person SSN="A222" Name="Tom"/>.
-        elem = doc.GetElementById("2");
-        Debug.Log(elem.OuterXml);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Eğer silaha dokunursa o silahı otomatik olarak alır.
+        if (other.transform.tag == "Gun")
+        {
+            //Silahın özellikleri eklenir
+            takeGun(int.Parse(other.transform.name));
+            //Silah yok edilir.
+            Destroy(other.gameObject);
+        }
     }
 }
