@@ -50,9 +50,12 @@ public class CharacterMovement : MonoBehaviour
 
                     //Karakterin yürüdüğü belirtilir.
                     isWalking = true;
+
+                    //Dönme aktif edilir.
+                    GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezeRotationY;
                 }
 
-                if (touchMovement.phase == TouchPhase.Moved)
+                if (touchMovement.phase == TouchPhase.Moved || touchMovement.phase == TouchPhase.Stationary)
                 {
                     //Anlık parmak pozisyonunu alır.
                     instantTouchPosition = touchMovement.position;
@@ -62,13 +65,14 @@ public class CharacterMovement : MonoBehaviour
 
                     //Dokunma pozisyonlarına göre hareket işlemi
                     Move(touchToCharacterDirection);
-
                 }
 
                 if (touchMovement.phase == TouchPhase.Ended)
                 {
                     //Karakterin durduğu belirtilir.
                     isWalking = false;
+                    //Dönme durdurulur.
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
         }
@@ -82,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
     void Move(Vector3 direction)
     {
         //Karakterin hareketi.
-        transform.Translate(direction.x * characterMoveSpeed * Time.deltaTime, 0, direction.y * characterMoveSpeed * Time.deltaTime,Space.World);
+        GetComponent<Rigidbody>().velocity = new Vector3(direction.x * characterMoveSpeed, 0, direction.y * characterMoveSpeed);
         //Karakterin dönmesi.
         transform.rotation = Quaternion.LookRotation(new Vector3(direction.x,0,direction.y));
     }

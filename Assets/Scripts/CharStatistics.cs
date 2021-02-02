@@ -5,32 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class CharStatistics : MonoBehaviour
 {
-    float health;
-    float exp;
+    [HideInInspector]
+    public float health = 100;
+    [HideInInspector]
+    public float exp;
 
     void Start()
     {
+        /*
         //Veriler çekilemediyse oyunu tekrar başlatır.
         if (PlayerPrefs.HasKey("name") && PlayerPrefs.HasKey("exp"))
         {
             SceneManager.LoadScene(0);
         }
-                
+        */    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void HealthDecrease(float hitPoint)
-    {
-        health -= hitPoint;
-    }
-
-    void HealthIncrase(float hitPoint)
+    public void healthIncDec(float hitPoint)
     {
         health += hitPoint;
+        Debug.Log(health);
     }
+
 }

@@ -14,11 +14,6 @@ public class CharacterCamera : MonoBehaviour
     //Yumuşatılmış pozisyon.
     Vector3 smoothedPosition;
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         //Karakteri takip eden kamera hareketi yumuşatıldı

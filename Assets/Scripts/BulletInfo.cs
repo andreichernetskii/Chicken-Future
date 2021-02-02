@@ -11,6 +11,8 @@ public class BulletInfo
     public int gunId { get; set; }
     [System.Xml.Serialization.XmlElementAttribute("Name")]
     public string name { get; set; }
+    [System.Xml.Serialization.XmlElementAttribute("HitPoint")]
+    public float hitPoint { get; set; }
     [System.Xml.Serialization.XmlElementAttribute("FireRate")]
     public float fireRate { get; set; }
     [System.Xml.Serialization.XmlElementAttribute("BulletSpeed")]

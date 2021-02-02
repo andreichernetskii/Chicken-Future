@@ -628,6 +628,7 @@ GameObject:
   - component: {fileID: 731175569}
   - component: {fileID: 731175568}
   - component: {fileID: 731175567}
+  - component: {fileID: 731175572}
   - component: {fileID: 731175566}
   - component: {fileID: 731175571}
   m_Layer: 0
@@ -741,6 +742,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &731175572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731175565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8d3bc40555b3e44a577cf0a845b1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  exp: 0
 --- !u!1 &932477985
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +767,7 @@ GameObject:
   - component: {fileID: 932477988}
   - component: {fileID: 932477987}
   - component: {fileID: 932477986}
+  - component: {fileID: 932477989}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -812,6 +828,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &932477989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932477985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8d3bc40555b3e44a577cf0a845b1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  exp: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1079,7 @@ BoxCollider:
   m_GameObject: {fileID: 1077963483}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1262,6 +1292,8 @@ GameObject:
   - component: {fileID: 1612500760}
   - component: {fileID: 1612500759}
   - component: {fileID: 1612500758}
+  - component: {fileID: 1612500765}
+  - component: {fileID: 1612500766}
   - component: {fileID: 1612500762}
   - component: {fileID: 1612500764}
   - component: {fileID: 1612500763}
@@ -1379,6 +1411,7 @@ MonoBehaviour:
   bulletObject: {fileID: 7550689654505542433, guid: 9a540ace3474798419d7860c6fffcdbe, type: 3}
   fireRate: 0.25
   bulletSpeed: 50
+  hitPoint: 0
   destroyTime: 5
   currentGun: 1
 --- !u!114 &1612500764
@@ -1396,6 +1429,36 @@ MonoBehaviour:
   characterCam: {fileID: 963194227}
   cameraConstantPosition: {x: 0, y: 4, z: -1}
   smooth: 0.3
+--- !u!54 &1612500765
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612500757}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 2
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!114 &1612500766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612500757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8d3bc40555b3e44a577cf0a845b1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  exp: 0
 --- !u!1 &1613369511
 GameObject:
   m_ObjectHideFlags: 0

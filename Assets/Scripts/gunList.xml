@@ -5,6 +5,7 @@
   <gun>
     <gunId>0</gunId>
     <Name>UMP</Name>
+    <HitPoint>25</HitPoint>
     <FireRate>.75</FireRate>
     <BulletSpeed>20</BulletSpeed>
   </gun>
@@ -12,6 +13,7 @@
   <gun>
     <gunId>1</gunId>
     <Name>P90</Name>
+    <HitPoint>1</HitPoint>
     <FireRate>.1</FireRate>
     <BulletSpeed>70</BulletSpeed>
   </gun>
@@ -19,6 +21,7 @@
   <gun>
     <gunId>2</gunId>
     <Name>AK47</Name>
+    <HitPoint>5</HitPoint>
     <FireRate>.25</FireRate>
     <BulletSpeed>90</BulletSpeed>
   </gun>

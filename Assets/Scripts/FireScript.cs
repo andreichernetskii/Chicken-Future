@@ -20,6 +20,8 @@ public class FireScript : MonoBehaviour
     public float fireRate=.25f;
     //Merminin sürati
     public float bulletSpeed=50;
+    //Merminin gücü
+    public float hitPoint;
     //Merminin yok olma süresi.
     public float destroyTime=3;
 
@@ -93,7 +95,9 @@ public class FireScript : MonoBehaviour
     void fire()
     {
         //Belirlenen konumda kurşunu oluşturur.
-        Instantiate(bulletObject,transform.position + GetComponent<CapsuleCollider>().bounds.extents.y * Vector3.up,transform.rotation);
+        GameObject bullet = Instantiate(bulletObject,transform.position + GetComponent<CapsuleCollider>().bounds.extents.y * Vector3.up,transform.rotation);
+        bullet.GetComponent<BulletScript>()._bulletSpeed = bulletSpeed;
+        bullet.GetComponent<BulletScript>()._hitPoint = hitPoint;
     }
 
     void takeGun(int id)
@@ -106,6 +110,7 @@ public class FireScript : MonoBehaviour
             {
                 fireRate = item.fireRate;
                 bulletSpeed = item.bulletSpeed;
+                hitPoint = item.hitPoint;
 
                 Debug.Log($"Current gun name:{item.name} , id:{item.gunId} , firerate:{item.fireRate} , bulletspeed:{item.bulletSpeed}");
                 break;
