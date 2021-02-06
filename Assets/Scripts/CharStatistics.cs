@@ -5,26 +5,60 @@ using UnityEngine.SceneManagement;
 
 public class CharStatistics : MonoBehaviour
 {
-    [HideInInspector]
+   // [HideInInspector]
     public float health = 100;
-    [HideInInspector]
+   // [HideInInspector]
     public float exp;
 
     void Start()
     {
-        /*
-        //Veriler çekilemediyse oyunu tekrar başlatır.
-        if (PlayerPrefs.HasKey("name") && PlayerPrefs.HasKey("exp"))
+        LoadStats();
+
+        Debug.Log(exp + " " + health);
+    }
+    void Update()
+    {
+        if (health<=0 && transform.tag == "Enemy")
         {
-            SceneManager.LoadScene(0);
+            Dead();
+        }    
+    }
+    public void SaveStats()
+    {
+        PlayerPrefs.SetFloat("exp",exp);
+        PlayerPrefs.SetFloat("health",health);
+    }
+    public void LoadStats()
+    {
+        if (PlayerPrefs.HasKey("health") && PlayerPrefs.HasKey("exp"))
+        {
+        PlayerPrefs.GetFloat("exp", exp);
+        PlayerPrefs.GetFloat("health", health);
+            Debug.Log("Aldı");
         }
-        */    
+        else
+        {
+            PlayerPrefs.SetFloat("exp", 0f);
+            PlayerPrefs.SetFloat("health", 0f);
+        }
+    }
+    public void Dead()
+    {
+        if (transform.tag != "Player")
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CharStatistics>().XPIncDec(exp);
+            Destroy(gameObject);
+        }
     }
 
-    public void healthIncDec(float hitPoint)
+    public void HealthIncDec(float hitPoint)
     {
         health += hitPoint;
-        Debug.Log(health);
+    }
+
+    public void XPIncDec(float xp)
+    {
+        exp += xp;
     }
 
 }

@@ -98,6 +98,7 @@ public class FireScript : MonoBehaviour
         GameObject bullet = Instantiate(bulletObject,transform.position + GetComponent<CapsuleCollider>().bounds.extents.y * Vector3.up,transform.rotation);
         bullet.GetComponent<BulletScript>()._bulletSpeed = bulletSpeed;
         bullet.GetComponent<BulletScript>()._hitPoint = hitPoint;
+        bullet.tag = transform.tag+"Bullet";
     }
 
     void takeGun(int id)
