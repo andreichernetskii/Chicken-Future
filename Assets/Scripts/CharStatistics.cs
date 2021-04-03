@@ -10,10 +10,10 @@ public class CharStatistics : MonoBehaviour
    // [HideInInspector]
     public float exp;
 
+    public string charName;
+
     void Start()
     {
-        LoadStats();
-
         Debug.Log(exp + " " + health);
     }
     void Update()
@@ -22,25 +22,6 @@ public class CharStatistics : MonoBehaviour
         {
             Dead();
         }    
-    }
-    public void SaveStats()
-    {
-        PlayerPrefs.SetFloat("exp",exp);
-        PlayerPrefs.SetFloat("health",health);
-    }
-    public void LoadStats()
-    {
-        if (PlayerPrefs.HasKey("health") && PlayerPrefs.HasKey("exp"))
-        {
-        PlayerPrefs.GetFloat("exp", exp);
-        PlayerPrefs.GetFloat("health", health);
-            Debug.Log("Aldı");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("exp", 0f);
-            PlayerPrefs.SetFloat("health", 0f);
-        }
     }
     public void Dead()
     {

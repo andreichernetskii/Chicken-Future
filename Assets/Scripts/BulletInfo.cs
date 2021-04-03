@@ -28,7 +28,4 @@ public class Guns
     [XmlArrayItem("gun", typeof(BulletInfo))]
     public List <BulletInfo> gun { get; set; }
 
-    void dene()
-    {
-    }
 }

@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.3</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.5</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2020.1.14f1</UnityVersion>
@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GetHit.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
     <Compile Include="Assets\Scripts\CharStatistics.cs" />
     <Compile Include="Assets\Scripts\CharacterMovement.cs" />
@@ -64,9 +65,13 @@
     <Compile Include="Assets\Scripts\CharacterCamera.cs" />
     <Compile Include="Assets\Scripts\BulletInfo.cs" />
     <Compile Include="Assets\Scripts\CharInfo.cs" />
-    <Compile Include="Assets\Scripts\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\MainMenuController.cs" />
+    <Compile Include="Assets\Scripts\EnemyInfo.cs" />
+    <Compile Include="Assets\Scripts\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\FightSceneController.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Scripts\enemyList.xml" />
      <None Include="Assets\Scripts\gunList.xml" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\2020.1.14f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

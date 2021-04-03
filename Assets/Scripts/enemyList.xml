@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EnemyInfo>
+  <enemies>
+  <enemy>
+    <EnemyId>0</EnemyId>
+    <Name>BlackBee</Name>
+    <Health>150</Health>
+    <XP>120</XP>
+  </enemy>
+  
+    <enemy>
+    <EnemyId>1</EnemyId>
+    <Name>Raider</Name>
+    <Health>75</Health>
+    <XP>50</XP>
+  </enemy>
+  
+    <enemy>
+    <EnemyId>2</EnemyId>
+    <Name>Seed Brothers</Name>
+    <Health>250</Health>
+    <XP>200</XP>
+  </enemy>
+  
+  </enemies>
+</EnemyInfo>

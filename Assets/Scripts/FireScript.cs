@@ -89,7 +89,6 @@ public class FireScript : MonoBehaviour
     public void FireOff()
     {
         isShooting = false;
-
     }
 
     void fire()
