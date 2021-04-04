@@ -31,39 +31,13 @@ public class FireScript : MonoBehaviour
     //elinde tuttuğu silahın ID numarası.
     public int currentGun = 0;
 
-    Guns guns = new Guns();
+    //GameController bağlantısı
+    GameController gameController;
 
     void Start()
     {
-
-        Debug.Log("Silah bilgileri çekiliyor");
-        
-        try
-        { 
-            //xml dosyasının yolu stringe atandı.
-            string path = "Assets/Scripts/gunList.xml";
-
-            //Guns tipinde xmlSerializer oluşturuldu
-            XmlSerializer serializer = new XmlSerializer(typeof(Guns));
-
-            //Dosya yolundaki xml verisi reader'da saklandı.
-            StreamReader reader = new StreamReader(path);
-            //Deserialize edilerek guns isimli listeye tüm değerler atandı.
-            guns = ((Guns)serializer.Deserialize(reader));
-            //xml okuyucu kapatıldı.
-            reader.Close();
-
-            //Take gun fonksiyonu çalıştırıldı.
-            takeGun(currentGun);
-        }
-        catch
-        {
-            Debug.Log("Silah verileri çekilirken hata oluştur. Oyun kapanıyor");
-            Application.Quit();
-        }
-
-        //Debug.Log("Silah özellikleri isim:" + guns.gun[0].name + " fireRate:" + guns.gun[0].fireRate + " bulletSpeed:" + guns.gun[0].bulletSpeed);
-
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        takeGun(currentGun);
     }
 
     void Update()
@@ -104,7 +78,7 @@ public class FireScript : MonoBehaviour
     {
         //Silahı aramak için foreach
         //Kısacası Id'si girilmiş silahı bulup çıkartır ve bunu silah özelliklerine ekler.
-        foreach (BulletInfo item in guns.gun)
+        foreach (BulletInfo item in gameController.gunList.gun)
         {
             if (id == item.gunId)
             {

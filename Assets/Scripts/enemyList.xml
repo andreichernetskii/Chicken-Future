@@ -19,7 +19,7 @@
     <enemy>
     <EnemyId>2</EnemyId>
     <Name>Seed Brothers</Name>
-    <Health>250</Health>
+    <Health>25</Health>
     <XP>200</XP>
   </enemy>
   

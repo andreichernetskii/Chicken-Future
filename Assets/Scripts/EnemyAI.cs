@@ -9,10 +9,14 @@ public class EnemyAI : MonoBehaviour
 
     float time;
     public float updatePerSecond = 1;
+
+    GameController gameController;
     
     void Start()
     {
-        //Düşman verileri xml'den çekilecek
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+
+        //Yapay zekanın başlangıç hedef ayarları
         navMesh = GetComponent<NavMeshAgent>();
         navMesh.destination = GameObject.FindGameObjectWithTag("Player").transform.position;
         navMesh.updateRotation = true;
@@ -29,4 +33,25 @@ public class EnemyAI : MonoBehaviour
             time = 0;
         }
     }
+
+
+    void DropGun(int gunId)
+    {
+        //silahı yerde alınmak üzere hazır bırakır.
+        GameObject gunDrop = Instantiate(gameController.GunPrefab);
+
+        gunDrop.transform.position = gameObject.transform.position;
+
+        //Burası düzeltilecek. Düşen silahın modeli
+        //gunDrop.GetComponent<MeshFilter>().mesh = ;
+        gunDrop.name = gunId.ToString();
+        gunDrop.tag = "Gun";
+    }
+
+    public void Dead()
+    {
+        DropGun(0);
+        Destroy(gameObject);
+    }
+
 }

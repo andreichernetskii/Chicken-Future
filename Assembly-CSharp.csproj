@@ -58,17 +58,18 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GetHit.cs" />
     <Compile Include="Assets\Scripts\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
     <Compile Include="Assets\Scripts\CharStatistics.cs" />
     <Compile Include="Assets\Scripts\CharacterMovement.cs" />
     <Compile Include="Assets\Scripts\FireScript.cs" />
     <Compile Include="Assets\Scripts\CharacterCamera.cs" />
+    <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\BulletInfo.cs" />
     <Compile Include="Assets\Scripts\CharInfo.cs" />
-    <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\EnemyInfo.cs" />
-    <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\FightSceneController.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Scripts\enemyList.xml" />

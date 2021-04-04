@@ -6,67 +6,45 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    Enemies enemies = new Enemies();
-
-    [Header("karakterin id numarası")]
-    public int charId=0;
-    string charName="deneme";
-    float charHealth=100;
-    float charXp=10;
-
-    void Start()
+    public void EnemyCreate(int enemyId,GameObject prefab, Enemies enemies, Vector3 enemyPosition,Mesh enemyMesh)
     {
-        Debug.Log("Karakter bilgileri çekiliyor");
 
-        try
-        {
-            //xml dosyasının yolu stringe atandı.
-            string path = "Assets/Scripts/enemyList.xml";
+        GameController gameController = GetComponent<GameController>();
 
-            //Guns tipinde xmlSerializer oluşturuldu
-            XmlSerializer serializer = new XmlSerializer(typeof(Enemies));
+        int charId = 0;
+        string charName = "deneme";
+        float charHealth = 100;
+        float charXp = 10;
 
-            //Dosya yolundaki xml verisi reader'da saklandı.
-            System.IO.StreamReader reader = new StreamReader(path);
-            //Deserialize edilerek guns isimli listeye tüm değerler atandı.
-            enemies = ((Enemies)serializer.Deserialize(reader));
-            //xml okuyucu kapatıldı.
-            reader.Close();
-            
-            EnemyChoose(charId);
-
-        }
-        catch
-        {
-            Debug.Log("Karakter verileri çekilirken hata oluştur. Oyun kapanıyor");
-            Application.Quit();
-        }
-
-    }
-
-    void EnemyStatisticsAdd()
-    {
-        GetComponent<CharStatistics>().health = 100;
-    }
-
-
-    void EnemyChoose(int id)
-    {
+        //Bu foreach, karakterin sayısal özelliklerini enemyId'den bulur ve saklar.
         foreach (EnemyInfo item in enemies.enemy)
         {
-            if (id == item.enemyId)
+            if (enemyId == item.enemyId)
             {
                 charName = item.name;
                 charHealth = item.health;
                 charXp = item.xp;
+                charId = item.enemyId;
 
-                Debug.Log($"Current char name:{item.name} , id:{item.enemyId} , health:{item.health} , bulletspeed:{item.xp}");
                 break;
             }
         }
 
-        GetComponent<CharStatistics>().health = charHealth;
-        GetComponent<CharStatistics>().exp = charXp;
-        GetComponent<CharStatistics>().charName = charName;
+        //Sahnede yeni bir karakter olurşturur.
+        GameObject enemyNew = Instantiate(prefab);
+
+        //Oluşturulan yeni karakterin sayısal özelliklerini ekler.
+        enemyNew.GetComponent<CharStatistics>().health = charHealth;
+        enemyNew.GetComponent<CharStatistics>().exp = charXp;
+        enemyNew.GetComponent<CharStatistics>().charName = charName;
+
+        //Oluşturulan yeni karakterin başlangıç pozisyonu ayarlanır.
+        enemyNew.transform.position = enemyPosition;
+        //Oluşturulan karakterin modeli seçilir.
+        enemyNew.GetComponent<MeshFilter>().mesh = enemyMesh;
+
+        //sahnedeki düşman sayısını tutar
+        gameController.enemyCount++;
     }
+
 }

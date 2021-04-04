@@ -27,8 +27,7 @@ public class CharStatistics : MonoBehaviour
     {
         if (transform.tag != "Player")
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<CharStatistics>().XPIncDec(exp);
-            Destroy(gameObject);
+            GetComponent<EnemyAI>().Dead();
         }
     }
 
