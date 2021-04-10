@@ -21,7 +21,7 @@ public class FireScript : MonoBehaviour
     //Merminin sürati
     public float bulletSpeed=50;
     //Merminin gücü
-    public float hitPoint;
+    public float hitPoint=5;
     //Merminin yok olma süresi.
     public float destroyTime=3;
 
@@ -29,7 +29,7 @@ public class FireScript : MonoBehaviour
     float time = 0;
 
     //elinde tuttuğu silahın ID numarası.
-    public int currentGun = 0;
+    public int currentGun = 2;
 
     //GameController bağlantısı
     GameController gameController;
@@ -93,15 +93,15 @@ public class FireScript : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        //Eğer silaha dokunursa o silahı otomatik olarak alır.
-        if (other.transform.tag == "Gun")
+        if (collision.transform.tag == "Gun")
         {
             //Silahın özellikleri eklenir
-            takeGun(int.Parse(other.transform.name));
+            takeGun(int.Parse(collision.transform.name));
             //Silah yok edilir.
-            Destroy(other.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }

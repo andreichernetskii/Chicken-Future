@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
 
         //test
         GetComponent<EnemyScript>().EnemyCreate(2,EnemyPreafab,enemyList,new Vector3(-2,0.7f,2),enemyMesh);
+        GetComponent<EnemyScript>().EnemyCreate(2, EnemyPreafab, enemyList, new Vector3(2, 0.7f, 2), enemyMesh);
         //test
     }
     void Update()

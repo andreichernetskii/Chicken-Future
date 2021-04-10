@@ -35,7 +35,7 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    void DropGun(int gunId)
+    void DropGun(int gunRandomRange)
     {
         //silahı yerde alınmak üzere hazır bırakır.
         GameObject gunDrop = Instantiate(gameController.GunPrefab);
@@ -44,13 +44,13 @@ public class EnemyAI : MonoBehaviour
 
         //Burası düzeltilecek. Düşen silahın modeli
         //gunDrop.GetComponent<MeshFilter>().mesh = ;
-        gunDrop.name = gunId.ToString();
+        gunDrop.name = (Random.Range(0,gunRandomRange)).ToString();
         gunDrop.tag = "Gun";
     }
 
     public void Dead()
     {
-        DropGun(0);
+        DropGun(3);
         Destroy(gameObject);
     }
 
