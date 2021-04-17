@@ -93,7 +93,6 @@ public class FireScript : MonoBehaviour
 
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Gun")

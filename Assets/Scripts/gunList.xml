@@ -25,5 +25,13 @@
     <FireRate>.25</FireRate>
     <BulletSpeed>90</BulletSpeed>
   </gun>
+
+    <gun>
+      <gunId>3</gunId>
+      <Name>botTestGun</Name>
+      <HitPoint>5</HitPoint>
+      <FireRate>1</FireRate>
+      <BulletSpeed>90</BulletSpeed>
+    </gun>
   </guns>
 </BulletInfo>
