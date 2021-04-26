@@ -10,28 +10,27 @@ using UnityEngine.SceneManagement;
 
 public class FireScript : MonoBehaviour
 {
-    //Ateş ediyor mu kontrolü
     public bool isShooting = false;
 
-    //Merminin objesi (model vs.)
+    //object of the bullet (model etc.)
     public GameObject bulletObject;
 
-    //İki atış arası geçen süre.
+    //fire rate in seconds.
     public float fireRate=.25f;
-    //Merminin sürati
+    //speetof the bullet
     public float bulletSpeed=50;
-    //Merminin gücü
+    //power of the bullet
     public float hitPoint=5;
-    //Merminin yok olma süresi.
+    //destroy time of bullet.
     public float destroyTime=3;
 
-    //Geçen zaman
+    //time in secs
     float time = 0;
 
-    //elinde tuttuğu silahın ID numarası.
+    //ID number of the current weapon.
     public int currentGun = 2;
 
-    //GameController bağlantısı
+    //GameController class created
     GameController gameController;
 
     void Start()
@@ -42,20 +41,20 @@ public class FireScript : MonoBehaviour
 
     void Update()
     {
-        //Zaman akışı
+        //time in secs
         time += Time.deltaTime;
         
-        //eğer atış aktifse, belli zaman aralıkları dahilinde ateş etsin.
+        //shot with fire rate.
         if(isShooting && time > fireRate)
         {
-            //Ateş etme işleminin gerçekleştiği metod.
+            //fire method starts.
             fire();
-            //Her ateş etmede geçen zaman sıfırlanır.
+            
             time = 0;
         }
     }
 
-    //Buton kontrolü için gerekli methodlar. Butona basılınca atışık aktif veya deaktif etme.
+    //button control methods for touchscreen (look at the ui system).
     public void FireOn()
     {
         isShooting = true;
@@ -67,7 +66,7 @@ public class FireScript : MonoBehaviour
 
     void fire()
     {
-        //Belirlenen konumda kurşunu oluşturur.
+        //creates bullet.
         GameObject bullet = Instantiate(bulletObject,transform.position + GetComponent<CapsuleCollider>().bounds.extents.y * Vector3.up,transform.rotation);
         bullet.GetComponent<BulletScript>()._bulletSpeed = bulletSpeed;
         bullet.GetComponent<BulletScript>()._hitPoint = hitPoint;
@@ -76,8 +75,8 @@ public class FireScript : MonoBehaviour
 
     void takeGun(int id)
     {
-        //Silahı aramak için foreach
-        //Kısacası Id'si girilmiş silahı bulup çıkartır ve bunu silah özelliklerine ekler.
+        //searching gun in xml
+        //pulling the gun via gunID.
         foreach (BulletInfo item in gameController.gunList.gun)
         {
             if (id == item.gunId)
@@ -97,9 +96,9 @@ public class FireScript : MonoBehaviour
     {
         if (collision.transform.tag == "Gun")
         {
-            //Silahın özellikleri eklenir
+            //adds gun info
             takeGun(int.Parse(collision.transform.name));
-            //Silah yok edilir.
+            //destroys the gun (dropped gun).
             Destroy(collision.gameObject);
         }
     }

@@ -7,29 +7,31 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
-    //silah listesi verisi.
+    //List of gun class.
     public Guns gunList;
 
-    //düşman verisi.
+    //list of the enemies class.
     public Enemies enemyList = new Enemies();
 
-    //standart karakter modeli
+    //standard model of character
     public GameObject EnemyPreafab;
     public Mesh enemyMesh;
 
-    //standart silah modeli
+    //standard model of the gun
     public GameObject GunPrefab;
     public Mesh gunMesh;
 
-    //GameController sınıfının hazır olup olmadığını bildirir.
+    //it is going to control the gamecontroller.
     public bool isReady = false;
 
     [HideInInspector]
+    //count of the enemies in the map
     public int enemyCount = 0;
 
     EnemyScript enemyScript;
     void Awake()
     {
+        //pulling data from xml's
         gunList = GunDataHook();
         enemyList = EnemyDataHook();
 
@@ -59,17 +61,17 @@ public class GameController : MonoBehaviour
 
         try
         {
-            //xml dosyasının yolu stringe atandı.
+            //xml file path to string
             string path = "Assets/Scripts/gunList.xml";
 
-            //Guns tipinde xmlSerializer oluşturuldu
+            //Guns serialization
             XmlSerializer serializer = new XmlSerializer(typeof(Guns));
 
-            //Dosya yolundaki xml verisi reader'da saklandı.
+            //xml data.
             StreamReader reader = new StreamReader(path);
-            //Deserialize edilerek guns isimli listeye tüm değerler atandı.
+            //Deserialize.
             Guns gunDeserialize = ((Guns)serializer.Deserialize(reader));
-            //xml okuyucu kapatıldı.
+            //xml reader closed.
             reader.Close();
 
             return gunDeserialize;
@@ -89,21 +91,22 @@ public class GameController : MonoBehaviour
     /// </summary>
     Enemies EnemyDataHook()
     {
+        //same things like GunDataHook method
         Debug.Log("Karakter bilgileri çekiliyor");
 
         try
         {
-            //xml dosyasının yolu stringe atandı.
+           
             string path = "Assets/Scripts/enemyList.xml";
 
-            //Guns tipinde xmlSerializer oluşturuldu
+           
             XmlSerializer serializer = new XmlSerializer(typeof(Enemies));
 
-            //Dosya yolundaki xml verisi reader'da saklandı.
+           
             System.IO.StreamReader reader = new StreamReader(path);
-            //Deserialize edilerek guns isimli listeye tüm değerler atandı.
+           
             Enemies enemyDeserialize = ((Enemies)serializer.Deserialize(reader));
-            //xml okuyucu kapatıldı.
+           
             reader.Close();
 
             return enemyDeserialize;

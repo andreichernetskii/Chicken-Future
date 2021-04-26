@@ -16,7 +16,7 @@ public class EnemyScript : MonoBehaviour
         float charHealth = 100;
         float charXp = 10;
 
-        //Bu foreach, karakterin sayısal özelliklerini enemyId'den bulur ve saklar.
+        //pulling the enemy info from xml
         foreach (EnemyInfo item in enemies.enemy)
         {
             if (enemyId == item.enemyId)
@@ -30,20 +30,20 @@ public class EnemyScript : MonoBehaviour
             }
         }
 
-        //Sahnede yeni bir karakter olurşturur.
+        //creates enemy in scene.
         GameObject enemyNew = Instantiate(prefab);
 
-        //Oluşturulan yeni karakterin sayısal özelliklerini ekler.
+        //adding enemy info from xml.
         enemyNew.GetComponent<CharStatistics>().health = charHealth;
         enemyNew.GetComponent<CharStatistics>().exp = charXp;
         enemyNew.GetComponent<CharStatistics>().charName = charName;
 
-        //Oluşturulan yeni karakterin başlangıç pozisyonu ayarlanır.
+        //start position of the enemy.
         enemyNew.transform.position = enemyPosition;
-        //Oluşturulan karakterin modeli seçilir.
+        //choosing the enemy model.
         enemyNew.GetComponent<MeshFilter>().mesh = enemyMesh;
 
-        //sahnedeki düşman sayısını tutar
+        //it increase the number of enemy
         gameController.enemyCount++;
     }
 

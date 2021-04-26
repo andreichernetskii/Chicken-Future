@@ -13,33 +13,34 @@ public class EnemyAI : MonoBehaviour
     float gunTime;
     public float updatePerSecond = 2;
 
-    //gamecontroller sınıfı çağırıldı
+    //gamecontroller class has created
     GameController gameController;
 
-    //Ateş ediyor mu kontrolü
+    //Is it shooting?
     bool isShooting = false;
 
-    //Merminin objesi (model vs.)
+    //object of bullet (model vs.)
     public GameObject bulletObject;
 
-    //İki atış arası geçen süre.
+    //second between the shots.
     float fireRate = .25f;
-    //Merminin sürati
+    //speed of bullet
     float bulletSpeed = 50;
-    //Merminin gücü
+    //power of the bullet
     float hitPoint = 5;
-    //Merminin yok olma süresi.
+    //destroy time of bullet.
     float destroyTime = 3;
 
 
-    //elinde tuttuğu silahın ID numarası.
+    //starting gun id.
     public int startGun = 2;
 
     void Start()
     {
+        //gamecontroller class pulled from the scene
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
-        //silah verisini çekip tek seferlik silah veriliyor bota.
+        //pull the gun info from xml.
         foreach (BulletInfo item in gameController.gunList.gun)
         {
             if (startGun == item.gunId)
@@ -52,7 +53,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        //Yapay zekanın başlangıç hedef ayarları
+        //start point of artificial intelligence character
         navMesh = GetComponent<NavMeshAgent>();
         navMesh.destination = GameObject.FindGameObjectWithTag("Player").transform.position;
         navMesh.updateRotation = true;
@@ -76,12 +77,13 @@ public class EnemyAI : MonoBehaviour
 
     void DropGun(int gunRandomRange)
     {
-        //silahı yerde alınmak üzere hazır bırakır.
+        //drops gun to take.
         GameObject gunDrop = Instantiate(gameController.GunPrefab);
 
+        //drop the gun to the dead char position.
         gunDrop.transform.position = gameObject.transform.position;
 
-        //Burası düzeltilecek. Düşen silahın modeli
+        //gonna be fix
         //gunDrop.GetComponent<MeshFilter>().mesh = ;
         gunDrop.name = (Random.Range(0,gunRandomRange)).ToString();
         gunDrop.tag = "Gun";
@@ -104,7 +106,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (gunTime>fireRate)
             {
-                //Belirlenen konumda kurşunu oluşturur.
+                //setting of bullet(when gun fire).
                 GameObject bullet = Instantiate(bulletObject, transform.position, transform.rotation);
                 bullet.GetComponent<BulletScript>()._bulletSpeed = bulletSpeed;
                 bullet.GetComponent<BulletScript>()._hitPoint = hitPoint;
